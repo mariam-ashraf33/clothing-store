@@ -56,7 +56,7 @@ const ProductPage = () => {
     `;
 
     window.open(
-      `https://wa.me/201222290080?text=${encodeURIComponent(message)}`,
+      `https://wa.me/201205558078?text=${encodeURIComponent(message)}`,
       "_blank"
     );
   };
