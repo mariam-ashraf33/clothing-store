@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
+
 import StoreLayout from "@/components/store/StoreLayout";
 import HomePage from "@/pages/HomePage";
 import ShopPage from "@/pages/ShopPage";
@@ -14,14 +15,12 @@ import CheckoutPage from "@/pages/CheckoutPage";
 import OrderConfirmationPage from "@/pages/OrderConfirmationPage";
 import TrackOrderPage from "@/pages/TrackOrderPage";
 import WishlistPage from "@/pages/WishlistPage";
-import AdminLoginPage from "@/pages/admin/AdminLoginPage";
-import AdminLayout from "@/pages/admin/AdminLayout";
-import AdminDashboardPage from "@/pages/admin/AdminDashboardPage";
-import AdminProductsPage from "@/pages/admin/AdminProductsPage";
-import AdminOrdersPage from "@/pages/admin/AdminOrdersPage";
-import AdminCouponsPage from "@/pages/admin/AdminCouponsPage";
-import AdminReviewsPage from "@/pages/admin/AdminReviewsPage";
 import NotFound from "@/pages/NotFound";
+
+// 🟢 Admin (الأساسي فقط)
+import AdminLogin from "@/pages/AdminLogin";
+import AdminLayout from "@/pages/AdminLayout";
+import AdminDashboard from "@/pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -32,8 +31,11 @@ const App = () => (
         <WishlistProvider>
           <Toaster />
           <Sonner />
+
           <BrowserRouter>
             <Routes>
+
+              {/* 🟢 Store */}
               <Route element={<StoreLayout />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/shop" element={<ShopPage />} />
@@ -44,17 +46,24 @@ const App = () => (
                 <Route path="/track-order" element={<TrackOrderPage />} />
                 <Route path="/wishlist" element={<WishlistPage />} />
               </Route>
-              <Route path="/admin" element={<AdminLoginPage />} />
+
+              {/* 🟢 Admin Login */}
+              <Route path="/admin-login" element={<AdminLogin />} />
+
+              {/* 🟢 Admin Panel */}
               <Route path="/admin" element={<AdminLayout />}>
-                <Route path="dashboard" element={<AdminDashboardPage />} />
-                <Route path="products" element={<AdminProductsPage />} />
-                <Route path="orders" element={<AdminOrdersPage />} />
-                <Route path="coupons" element={<AdminCouponsPage />} />
-                <Route path="reviews" element={<AdminReviewsPage />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
               </Route>
+
+              {/* 🟢 Not Found */}
               <Route path="*" element={<NotFound />} />
+<Route path="/admin" element={<AdminLayout />}>
+  <Route index element={<AdminDashboard />} />
+  <Route path="dashboard" element={<AdminDashboard />} />
+</Route>
             </Routes>
           </BrowserRouter>
+
         </WishlistProvider>
       </CartProvider>
     </TooltipProvider>
